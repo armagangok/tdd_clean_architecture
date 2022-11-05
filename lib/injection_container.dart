@@ -1,4 +1,3 @@
-import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:get_it/get_it.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -39,11 +38,10 @@ Future<void> init() async {
       () => RemoteDataSoureImp(client: getIt()));
   getIt.registerLazySingleton<LocalDataSource>(
       () => LocalDataSourceImp(sharedPreferences: getIt()));
-  getIt.registerLazySingleton<NetworkInfo>(
-      () => NetworkInfoImp(connectionChecker: getIt()));
+  getIt.registerLazySingleton<NetworkInfo>(() => NetworkInfoImp());
 
   final sharedPreferences = await SharedPreferences.getInstance();
   getIt.registerLazySingleton(() => sharedPreferences);
   getIt.registerLazySingleton(() => http.Client());
-  getIt.registerLazySingleton(() => DataConnectionChecker());
+  // getIt.registerLazySingleton(() => DataConnectionChecker());
 }

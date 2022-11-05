@@ -1,10 +1,11 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:tdd_clean_architecture/core/error/failures.dart';
-import 'package:tdd_clean_architecture/core/util/input_converter.dart';
-import 'package:tdd_clean_architecture/feature/number_trivia/domain/entities/number_trivia.dart';
-import 'package:tdd_clean_architecture/feature/number_trivia/domain/usecase/get_concrete_number_trivia.dart';
-import 'package:tdd_clean_architecture/feature/number_trivia/domain/usecase/get_random_number_triva.dart';
+
+import '../../../../core/error/failures.dart';
+import '../../../../core/util/input_converter.dart';
+import '../../domain/entities/number_trivia.dart';
+import '../../domain/usecase/get_concrete_number_trivia.dart';
+import '../../domain/usecase/get_random_number_triva.dart';
 
 part 'number_trivia_event.dart';
 part 'number_trivia_state.dart';
@@ -24,7 +25,9 @@ class NumberTriviaBloc extends Bloc<NumberTriviaEvent, NumberTriviaState> {
     required this.getRandomNumberTrivia,
     required this.inputConverter,
   }) : super(Empty()) {
-    on<NumberTriviaEvent>((event, emit) {});
+    on<NumberTriviaEvent>((event, emit) {
+      mapEventToState(event);
+    });
   }
 
   NumberTriviaState get initialState => Empty();
